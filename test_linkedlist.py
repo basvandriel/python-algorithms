@@ -41,8 +41,7 @@ def test_linkedlist_should_put_value_in_the_middle():
 
 def test_linkedlist_should_convert_to_list_with_no_head():
     ll = linkedlist.SortedLinkedList()
-    result = ll.to_list()
-    assert result == []
+    assert list(ll) == []
 
 
 def test_linkedlist_should_work_with_depth1():
@@ -86,3 +85,15 @@ def test_delete_with_direct_match_next_value():
 
     assert ll.head.value == 1
     assert ll.head.next.value == 3
+
+
+def test_linkedlist_iterating():
+    ll = linkedlist.SortedLinkedList()
+    ll.insert(1)
+    ll.insert(2)
+    ll.insert(3)
+
+    result = list(ll)
+    assert result == [1, 2, 3]
+
+    assert len(ll) == 3

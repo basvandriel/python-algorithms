@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional, Self
+from typing import Generator, Optional, Self
 
 
 @dataclass
@@ -12,6 +12,13 @@ class Node[T: int]:
         if self.next is None:
             return 0
         return 1 + self.next.depth
+
+    @property
+    def size(self):
+        if self.next is None:
+            return 1
+
+        return 1 + self.next.size
 
     def find_deepest_value(self) -> int:
         # There is no next value, this is the deepest
@@ -113,12 +120,12 @@ class SortedLinkedList:
 
         return 0
 
-    def to_list(self) -> list[int]:
-        result = []
+    def __iter__(self) -> Generator[int, None, None]:
         current: Optional[Node] = self.head
 
         while current is not None:
-            result.append(current.value)
+            yield current.value
             current = current.next
 
-        return result
+    def __len__(self) -> int:
+        return self.head.size

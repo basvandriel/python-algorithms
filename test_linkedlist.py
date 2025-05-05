@@ -16,7 +16,6 @@ def test_build_linkedlist_should_insert_correctly():
     ll.insert(4)
     ll.insert(5)
 
-    assert ll.head.depth == 2
     assert ll.head.find_deepest_value() == 5
 
 
@@ -25,7 +24,6 @@ def test_linkedlist_should_put_number_before():
     ll.insert(4)
     ll.insert(1)
 
-    assert ll.head.depth == 1
     assert ll.head.find_deepest_value() == 4
 
 
@@ -48,7 +46,7 @@ def test_linkedlist_should_work_with_depth1():
     ll = linkedlist.SortedLinkedList()
     ll.insert(1)
 
-    assert ll.to_list() == [1]
+    assert list(ll) == [1]
 
 
 def test_linkedlist_should_work_with_multiple_values():
@@ -58,7 +56,7 @@ def test_linkedlist_should_work_with_multiple_values():
     ll.insert(4)
     ll.insert(5)
 
-    assert ll.to_list() == [1, 2, 4, 5]
+    assert list(ll) == [1, 2, 4, 5]
 
 
 def test_linkedlist_delete_no_data():

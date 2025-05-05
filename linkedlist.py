@@ -8,22 +8,13 @@ class Node[T: int]:
     next: Optional["Node[T]"]
 
     @property
-    def depth(self):
-        if self.next is None:
-            return 0
-        return 1 + self.next.depth
-
-    @property
     def size(self):
         if self.next is None:
             return 1
         return 1 + self.next.size
 
     def find_deepest_value(self) -> int:
-        # There is no next value, this is the deepest
-        if self.next is None:
-            return self.value
-        return self.next.find_deepest_value()
+        return self.find_deepest_node().value
 
     def find_deepest_node(self) -> "Node":
         if self.next is None:
@@ -69,8 +60,9 @@ class SortedLinkedList:
 
         # Swap the current next and current values
         if value < self.head.value:
-            self.head.next = self.head
-            self.head.value = value
+            node.next = self.head
+            self.head = node
+
             return
 
         deepest_node = self.head.find_deepest_node()
@@ -129,4 +121,6 @@ class SortedLinkedList:
             current = current.next
 
     def __len__(self) -> int:
+        if not self.head:
+            return 0
         return self.head.size

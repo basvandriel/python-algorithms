@@ -78,11 +78,11 @@ def test_delete_with_direct_match_no_next_value():
 
 def test_delete_with_direct_match_next_value():
     ll = linkedlist.SortedLinkedList()
+    ll.insert(1)
     ll.insert(2)
     ll.insert(3)
 
     ll.delete_value(2)
 
-    print(1)
-
-    # assert ll.head is None
+    assert ll.head.value == 1
+    assert ll.head.next.value == 3

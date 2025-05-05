@@ -105,13 +105,11 @@ class SortedLinkedList:
         current = self.head
 
         while current.next is not None:
-            if current.value == value:
-                print(1)
-                ...
-
-            current = current.next
-
-        # TODO find the first node which has the value
+            if current.next.value == value:
+                current.next = current.next.next
+                return 1
+            else:
+                current = current.next
 
         return 0
 

@@ -17,20 +17,17 @@ class Node[T: int]:
     def size(self):
         if self.next is None:
             return 1
-
         return 1 + self.next.size
 
     def find_deepest_value(self) -> int:
         # There is no next value, this is the deepest
         if self.next is None:
             return self.value
-
         return self.next.find_deepest_value()
 
     def find_deepest_node(self) -> "Node":
         if self.next is None:
             return self
-
         return self.next.find_deepest_node()
 
 
@@ -92,10 +89,12 @@ class SortedLinkedList:
         # And vica versa
         middle_node.next = node
 
-    def delete_value(self: Self, value: int) -> int:
-        """returns the amount of deleted rows"""
+    def delete_first_value(self: Self, value: int) -> int:
+        return self.delete_value(value, True)
 
-        # No data :-)
+    def delete_value(self: Self, value: int, only_delete_first: bool = False) -> int:
+        """returns the amount of deleted values"""
+        # No data to delete
         if not self.head:
             return 0
 
@@ -104,21 +103,23 @@ class SortedLinkedList:
             self.head = None
             return 1
 
-        # Now we need a re-arrangement
-        if self.head.value == value and self.head.next is not None:
-            self.head = self.head.next
-            return 1
+        delete_count = 0
 
+        # TODO search for the values to delete
         current = self.head
 
+        # We always check the next => the head has already been checked
         while current.next is not None:
             if current.next.value == value:
                 current.next = current.next.next
-                return 1
+                delete_count += 1
+
+                if only_delete_first:
+                    break
             else:
                 current = current.next
 
-        return 0
+        return delete_count
 
     def __iter__(self) -> Generator[int, None, None]:
         current: Optional[Node] = self.head

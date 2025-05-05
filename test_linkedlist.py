@@ -63,14 +63,14 @@ def test_linkedlist_should_work_with_multiple_values():
 
 def test_linkedlist_delete_no_data():
     ll = linkedlist.SortedLinkedList()
-    assert ll.delete_value(1) == 0
+    assert ll.delete_first_value(1) == 0
 
 
 def test_delete_with_direct_match_no_next_value():
     ll = linkedlist.SortedLinkedList()
     ll.insert(2)
 
-    ll.delete_value(2)
+    ll.delete_first_value(2)
 
     assert ll.head is None
 
@@ -81,7 +81,7 @@ def test_delete_with_direct_match_next_value():
     ll.insert(2)
     ll.insert(3)
 
-    ll.delete_value(2)
+    ll.delete_first_value(2)
 
     assert ll.head.value == 1
     assert ll.head.next.value == 3
@@ -97,3 +97,14 @@ def test_linkedlist_iterating():
     assert result == [1, 2, 3]
 
     assert len(ll) == 3
+
+
+def test_multidelete_linkedlist():
+    ll = linkedlist.SortedLinkedList()
+    ll.insert(1)
+    ll.insert(2)
+    ll.insert(2)
+    ll.insert(3)
+
+    result = ll.delete_value(2)
+    assert result == 2

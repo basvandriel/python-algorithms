@@ -1,7 +1,7 @@
 #### LinkedList
 - [x] Adding functionality
-- [ ] Deleting (WIP) 
-- [ ] Iterating 
+- [x] Deleting 
+- [x] Iterating 
 
 #### Interval tree
 TODO

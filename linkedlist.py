@@ -3,9 +3,9 @@ from typing import Generator, Optional, Self
 
 
 @dataclass
-class Node[T: int]:
-    value: T
-    next: Optional["Node[T]"]
+class Node:
+    value: int
+    next: Optional["Node"]
 
     @property
     def size(self):
@@ -22,24 +22,23 @@ class Node[T: int]:
         return self.next.find_deepest_node()
 
 
-def build_node(data: list[int], index: int = 0) -> Optional[Node[int]]:
-    out_of_bounds: bool = index > (len(data) - 1)
-
-    if out_of_bounds:
-        return None
-
-    next_item = build_node(data, index + 1)
-
-    return Node(data[index], next_item)
-
-
 class SortedLinkedList:
     head: Optional[Node]
 
     def __init__(self) -> None:
         self.head = None
 
-    def _find_node_in_middle(self, value: int) -> Node:
+    @classmethod
+    def from_list(cls, numbers: list[int]) -> "SortedLinkedList":
+        instance = cls()
+        for n in sorted(numbers):
+            instance.insert(n)
+        return instance
+
+    def _find_node_in_middle(self, value: int) -> Node | None:
+        if not self.head:
+            return None
+
         # For example, we have our head like 1,4,5,
         # this method should return the first head
         current = self.head
@@ -74,6 +73,10 @@ class SortedLinkedList:
 
         # Find the node where to put the value in the 'next' attribute
         middle_node = self._find_node_in_middle(value)
+
+        # This should not happen
+        if not middle_node:
+            return
 
         # For the current node, set the old value in the next value
         node.next = middle_node.next

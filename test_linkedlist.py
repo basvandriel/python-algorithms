@@ -2,11 +2,10 @@ import linkedlist
 
 
 def test_build_node():
-    x = linkedlist.build_node([1, 2, 3, 4])
-
+    x = linkedlist.SortedLinkedList.from_list([1, 2, 3, 4])
     assert x is not None
 
-    z = x.find_deepest_value()
+    z = x.head.find_deepest_value()
     assert z == 4
 
 

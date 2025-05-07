@@ -44,9 +44,7 @@ class NonSortedLinkedList:
         delete_count = 0
 
         if self.head and self.head.value == value:
-            next_node = self.head.next
-
-            self.head = next_node
+            self.head = self.head.next
             delete_count += 1
 
         # Now, next is not None. Let's find the values

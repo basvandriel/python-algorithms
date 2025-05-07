@@ -38,3 +38,27 @@ class NonSortedLinkedList:
         while current is not None:
             yield current.value
             current = current.next
+
+    def delete(self, value: int) -> int:
+        """returns the delete count"""
+        delete_count = 0
+
+        if self.head and self.head.value == value:
+            next_node = self.head.next
+
+            self.head = next_node
+            delete_count += 1
+
+        # Now, next is not None. Let's find the values
+        # Find the value
+        current: Optional[Node] = self.head
+
+        # Before we start doing this, first check the head value
+        while current and current.next is not None:
+            if current.next.value == value:
+                current.next = current.next.next
+                delete_count += 1
+            else:
+                current = current.next
+
+        return delete_count
